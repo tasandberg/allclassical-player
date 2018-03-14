@@ -1,0 +1,10 @@
+{
+  "name": "allclassical-player",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Tim Sandberg",
+  "license": "MIT",
+  "dependencies": {
+    "mplayer": "^2.1.0"
+  }
+}
