@@ -1,11 +1,15 @@
-const readline = require('readline');
-const MPlayer = require('mplayer');
-const { exec } = require('child_process');
+const MPlayer = require('mplayer')
+const { exec } = require('child_process')
 
-var player = new MPlayer();
+MPlayer.prototype.quit = function() {
+  console.log('Sending quit command')
+  this.player.cmd('quit')
+}
+
+var player = new MPlayer()
 
 player.on('start', function(args) {
-  console.log(args);
+  console.log(args)
 })
 
 function notifyStatus(status) {
@@ -17,9 +21,13 @@ function notifyStatus(status) {
   exec(`osascript -e '${appleScript}'`)
 }
 
-player.on('status', function (status) {
-  notifyStatus(status);
+player.on('status', function(status) {
+  console.log(status)
+  notifyStatus(status)
+})
 
+player.on('stop', function(p) {
+  console.log('p')
 })
 
 player.openFile('http://allclassical-ice.streamguys.com/ac96k', {
@@ -27,28 +35,10 @@ player.openFile('http://allclassical-ice.streamguys.com/ac96k', {
   cacheMin: 1
 })
 
-player.volume(100);
-
-readline.emitKeypressEvents(process.stdin);
-process.stdin.setRawMode(true);
-process.stdin.on('keypress', (str, key) => {
-  if (key.sequence === 'Q' || key.ctrl && key.name == 'c') {
-    console.log("Exiting...");
-    player.stop();
-    process.exit();
-  } else if (key.name === 'p') {
-    player.status.playing ? player.pause() : player.play()
-  } else {
-    console.log(`You pressed the "${str}" key`);
-    console.log();
-    console.log(key);
-    console.log();
-  }
-});
-console.log('<P>lay/<P>ause <Q>uit');
+player.volume(100)
 
 process.on('SIGINT', function() {
-  console.log("Exiting...");
-  player.stop();
-  process.exit();
+  console.log('Exiting...')
+  player.stop()
+  player.player.instance.kill(2)
 })
