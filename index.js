@@ -1,5 +1,6 @@
 const MPlayer = require('mplayer')
 const { exec } = require('child_process')
+const pastSongs = []
 
 MPlayer.prototype.quit = function() {
   console.log('Sending quit command')
@@ -7,10 +8,6 @@ MPlayer.prototype.quit = function() {
 }
 
 var player = new MPlayer()
-
-player.on('start', function(args) {
-  console.log(args)
-})
 
 function notifyStatus(status) {
   if (!status.title) return
@@ -21,9 +18,42 @@ function notifyStatus(status) {
   exec(`osascript -e '${appleScript}'`)
 }
 
+function logSong(song) {
+  if (!song) return false
+  pastSongs.unshift({ date: new Date(), title: song })
+  return true
+}
+
+function ljust(string, width, padding) {
+	padding = padding || " ";
+	padding = padding.substr( 0, 1 );
+	if ( string.length < width )
+		return string + padding.repeat( width - string.length );
+	else
+		return string;
+}
+
+function printMenu(status) {
+  let menu = "89.9 Allclassical Portland\n-------------\n"
+  menu += "Stream: " + status.filename
+  menu += "Title: " + status.title
+  menu += "\n"
+  menu += "Recent Songs\n-------------\n"
+  for (let i = 1; i < 11; i++) {
+    let song = pastSongs[i-1]
+    if (!song) continue
+    menu += ljust(`${i}. `, 4)
+    menu += song.date + " -- " + song.title + "\n"
+  }
+  process.stdout.write('');
+  process.stdout.write(menu);
+}
+
 player.on('status', function(status) {
-  console.log(status)
-  notifyStatus(status)
+  if (logSong(status.title)) {
+    printMenu(status)  
+    notifyStatus(status)
+  }
 })
 
 player.on('stop', function(p) {
