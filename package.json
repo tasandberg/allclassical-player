@@ -2,6 +2,9 @@
   "name": "allclassical-player",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "author": "Tim Sandberg",
   "license": "MIT",
   "dependencies": {
