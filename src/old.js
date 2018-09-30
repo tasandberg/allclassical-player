@@ -4,12 +4,7 @@ const streams = [
   'http://allclassical-ice.streamguys.com/ac128kmp3'
 ]
 
-{
-  currentStream: { label: '', value: ''},
-  availableStreams: [],
-  volume: 100,
-  recentSongs: []
-}
+
 const streamSelect = document.getElementById('streamSelect')
 streams.forEach((s) => {
   const opt = document.createElement('option')

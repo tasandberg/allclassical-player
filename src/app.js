@@ -1,10 +1,5 @@
 import React from 'react'
 import { render } from 'react-dom'
-import reducers from './src/reducers'
-import { createStore } from 'redux'
+import WrappedApp from './src/hot-wrapper'
 
-const store = createStore(reducers)
-
-const App = () => <h1>plz</h1>
-
-render(<App />, document.getElementById('main'))
+render(<WrappedApp />, document.getElementById('main'))

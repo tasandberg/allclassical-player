@@ -6,7 +6,7 @@ const {
   BrowserWindow
 } = electron
 
-enableLiveReload()
+enableLiveReload({ strategy: 'react-hmr' })
 
 let win
 

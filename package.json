@@ -11,8 +11,7 @@
     "icy": "^2.1.0",
     "jsmediatags": "^3.8.1",
     "mplayer": "^2.1.0",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.0",
+    "react-hot-loader": "^4.0.0",
     "speaker": "^0.4.1"
   },
   "devDependencies": {
