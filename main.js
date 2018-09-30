@@ -1,8 +1,12 @@
 const electron = require('electron')
+import { enableLiveReload } from 'electron-compile'
+
 const {
   app,
   BrowserWindow
 } = electron
+
+enableLiveReload()
 
 let win
 
