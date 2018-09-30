@@ -9,10 +9,13 @@
   },
   "dependencies": {
     "electron": "^3.0.2",
-    "electron-compile": "^6.4.3",
-    "mplayer": "^2.1.0"
+    "icy": "^2.1.0",
+    "jsmediatags": "^3.8.1",
+    "mplayer": "^2.1.0",
+    "speaker": "^0.4.1"
   },
   "devDependencies": {
-    "electron-prebuilt-compile": "^3.0.0"
+    "electron-reload": "^1.2.5",
+    "standard": "^12.0.1"
   }
 }

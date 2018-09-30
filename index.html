@@ -3,23 +3,25 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Hello World!</title>
+  <title>Trodio</title>
+  <link rel="stylesheet" href="vendor/css/uikit.min.css" />
+  <script src="vendor/js/uikit.min.js"></script>
+  <script src="vendor/js/uikit-icons.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <meta http-equiv="Content-Security-Policy" content="default-src *; script-src *">
 </head>
 
-<body>
-  <h1>Hello World!</h1>
-  We are using node
-  <script>
-    document.write(process.versions.node)
-  </script>,
-  Chrome
-  <script>
-    document.write(process.versions.chrome)
-  </script>,
-  and Electron
-  <script>
-    document.write(process.versions.electron)
-  </script>.
-</body>
+<body class='uk-padding'>
+  <h4>Trodio</h4>
+  <button class="uk-button uk-button-default" id="playBtn">Play</button>
+  <button class="uk-button uk-button-default" id="stopBtn">Stop</button>
 
+  <select id='streamSelect'>
+  </select>
+
+  <pre id='streamMeta'>
+
+  </pre>
+  <script src="src/app.js"></script>
+</body>
 </html>
