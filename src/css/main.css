@@ -10,7 +10,6 @@ body {
 
 #main {
   background: white;
-  color: red;
   position: relative;
   /* margin: 15px; */
   border-radius: 8px;
@@ -22,7 +21,7 @@ body {
   Issue: https: //github.com/electron/electron/issues/13164
 */
 
- /* #main::before {
+/* #main::before {
    content: ' ';
    width: 20px;
    height: 20px;

@@ -45,6 +45,7 @@ function initializeGui () {
     width: 400,
     height: 310,
     frame: false,
+    show: true,
     fullScreenable: false,
     resizeable: false,
     transparent: true,
@@ -80,7 +81,7 @@ const getWindowPosition = () => {
   const trayBounds = tray.getBounds()
 
   // Center gui horizontally below the tray icon
-  const x = Math.round(trayBounds.x + (trayBounds.width) - (windowBounds.width / 2))
+  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width))
 
   // Position window 4 pixels vertically below the tray icon
   const y = Math.round(trayBounds.y + trayBounds.height + 10)

@@ -1,73 +1,100 @@
-import React, { Component } from 'react'
-import AudioWrapper from './AudioWrapper'
-import { ipcMain } from 'electron'
+import React, { Component } from "react";
+import AudioMeta from "./AudioMeta";
+import AudioWrapper from "./AudioWrapper";
+
+const Segment = ({ children }) => <div className="uk-margin"> {children} </div>;
 
 function getAudio(url) {
-  const audio = new Audio(url)
-  audio.addEventListener('progress', function(p) {
-    console.log('Progress', p)
-  })
-
-  audio.addEventListener('canplay', function (p) {
-    console.log('canplay', p)
-  })
-
-  return audio
+  const audio = new Audio(url);
+  return audio;
 }
 
 const STREAMS = [
-  'http://allclassical-ice.streamguys.com/ac96k',
-  'http://allclassical-ice.streamguys.com/ac128kmp3'
-]
+  { label: "ac96k", value: "http://allclassical-ice.streamguys.com/ac96k" },
+  {
+    label: "ac128k",
+    value: "http://allclassical-ice.streamguys.com/ac128kmp3"
+  }
+];
 
 class Player extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      currentStream: STREAMS[0],
+      currentStream: STREAMS[0].value,
       player: null
-    }
+    };
   }
 
-  changeStream = (event) => {
+  changeStream = event => {
     this.setState({
       currentStream: event.target.value
-    })
-  }
+    });
+  };
 
   playStream = () => {
     if (this.state.player) {
-      console.error('Orphaned player exists')
-      return
+      console.error("Orphaned player exists");
+      return;
     }
-    const newPlayer = getAudio(this.state.currentStream)
-    newPlayer.play()
+    const newPlayer = getAudio(this.state.currentStream);
+    newPlayer.play();
 
     this.setState({
       player: newPlayer
-    })
-  }
+    });
+  };
 
   pauseStream = () => {
-    this.state.player.pause()
-    this.setState({ player: null })
-  }
-
+    this.state.player.pause();
+    this.setState({
+      player: null
+    });
+  };
 
   render() {
-    const { currentStream, player } = this.state
+    const { currentStream, player } = this.state;
+    const streamOptions = STREAMS.map(({ label, value }) => (
+      <option key={label} value={value}>
+        {label}
+      </option>
+    ));
     return (
-      <div className='uk-padding'>
-        <h1>AllClassical Portland 89.9fm</h1>
-        <button onClick={() => player ? this.pauseStream() : this.playStream()}>
-          {player ? 'Pause' : 'Play'}
-        </button>
-        <select className='uk-select' value={currentStream} onChange={this.changeStream}>
-          {STREAMS.map(s => <option key={s}>{s}</option>)}
-        </select>
+      <div className="uk-padding">
+        <h3> AllClassical Portland 89.9 fm </h3>
+        <Segment>
+          <button
+            className="uk-button uk-button-primary uk-button-small"
+            onClick={() => (player ? this.pauseStream() : this.playStream())}
+          >
+            {" "}
+            {player ? "Pause" : "Play"}{" "}
+          </button>
+        </Segment>
+        <Segment>
+          <select
+            className="uk-select"
+            value={currentStream}
+            onChange={this.changeStream}
+          >
+            {streamOptions}
+          </select>
+        </Segment>
+        <Segment>
+          <AudioMeta source={currentStream} isPlaying={!!player} />
+        </Segment>
+        <Segment>
+          <input
+            className="uk-range"
+            type="range"
+            value={this.player ? this.player.volume : 0}
+            disabled={!this.player}
+            onChange={e => console.log(e.target.value)}
+          />
+        </Segment>
       </div>
-    )
+    );
   }
 }
-export default Player
+export default Player;
