@@ -1,6 +1,5 @@
 import React from 'react'
 import { hot } from 'react-hot-loader'
+import Player from './components/Player'
 
-const App = () => < h1 >plz</h1>
-
-export default hot(module)(App)
+export default hot(module)(Player)

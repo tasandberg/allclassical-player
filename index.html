@@ -5,14 +5,17 @@
   <meta charset="UTF-8">
   <title>Trodio</title>
   <link rel="stylesheet" href="vendor/css/uikit.min.css" />
+  <link rel="stylesheet" href="src/css/main.css" />
   <script src="vendor/js/uikit.min.js"></script>
   <script src="vendor/js/uikit-icons.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <meta http-equiv="Content-Security-Policy" content="default-src *; script-src *">
+  <meta http-equiv="Content-Security-Policy" content="default-src *; script-src *; img-src * 'self' data: image:;">
 </head>
 
-<body class='uk-padding'>
-  <div id="main"></div>
+<body>
+  <div id="main">
+    <div id="arrow"></div>
+  </div>
   <script src="src/app.js"></script>
 </body>
 </html>

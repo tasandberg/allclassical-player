@@ -1,0 +1,34 @@
+html {
+  background: transparent;
+  overflow: visible;
+}
+
+body {
+  background: transparent;
+  overflow: visible;
+}
+
+#main {
+  background: white;
+  color: red;
+  position: relative;
+  /* margin: 15px; */
+  border-radius: 8px;
+  overflow-y: visible;
+}
+
+/* 
+  There's an unsightly white line at the top under mojave.  Can disable this once fixed.
+  Issue: https: //github.com/electron/electron/issues/13164
+*/
+
+ /* #main::before {
+   content: ' ';
+   width: 20px;
+   height: 20px;
+   transform: rotate(45deg);
+   position: absolute;
+   left: calc(50% - 10px);
+   top: -10px;
+   background: white;
+ } */
