@@ -20,6 +20,7 @@ app.on('ready', createWindow)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
+  gui = null
   app.quit()
 })
 
@@ -36,6 +37,7 @@ function createWindow () {
 
   tray = new Tray(nativeImage.createFromPath('./tray.png'))
   tray.on('click', () => toggleGui())
+  showGui()
 }
 
 function initializeGui () {
@@ -54,7 +56,7 @@ function initializeGui () {
   gui.on('blur', () => gui.hide())
   gui.openDevTools()
   gui.on('closed', () => {
-    gui.hide()
+    gui = null
   })
 }
 
